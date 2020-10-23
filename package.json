@@ -1,0 +1,20 @@
+{
+  "name": "turni-di-lilo-bot",
+  "version": "1.0.0",
+  "description": "Il bot di telegram dei turni di samu a lavoro perché nessuno se li ricorda mai.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node index.js"
+  },
+  "author": "Federico Chilese",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^3.7.0",
+    "node-telegram-bot-api": "^0.50.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.2",
+    "typescript": "^4.0.3"
+  }
+}
