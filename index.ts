@@ -11,9 +11,10 @@ var isSet = false;
 
 bot.onText(/\/routine/, (msg, match) => {
   let chatId = msg.chat.id;
+  let random = Math.floor(Math.random() * 12);
   bot.sendPhoto(
     chatId,
-    "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/05/Daily-Routine-1.jpg?auto=format&q=60&w=1860&h=1395&fit=crop&crop=faces",
+    `./monkes/${random}.jpg`,
     {
       caption: `<b>I turni dell'operatore Lilo sono:</b>\n• ${TURNI[0]}: <code>[${TIMES[0]}]</code>\n• ${TURNI[1]}: - <code>[${TIMES[1]}]</code>\n• ${TURNI[2]}: - <code>[${TIMES[2]}]</code>`,
       parse_mode: "HTML"
@@ -79,9 +80,11 @@ bot.onText(/\/turno/, (msg, match) => {
     // Metti il turno successivo
     nextTurn();
 
+  let random = Math.floor(Math.random() * 12);
+
   bot.sendPhoto(
     chatId,
-    "http://www.azienda-digitale.it/wp-content/uploads/2016/11/tablet-gestione-turni-1980x1485.jpg",
+    `./monkes/${random}.jpg`,
     {
       caption: `Il turno di oggi dell'operatore Lilo è:  <code>${todayTurn} (${turnTime})</code>`,
       parse_mode: "HTML"
@@ -91,6 +94,8 @@ bot.onText(/\/turno/, (msg, match) => {
 
 bot.onText(/\/prossimoTurno/, (msg, match) => {
   let chatId = msg.chat.id;
+  let random = Math.floor(Math.random() * 12);
+
   if (!isSet) {
     bot.sendMessage(
       chatId,
@@ -102,11 +107,17 @@ bot.onText(/\/prossimoTurno/, (msg, match) => {
     return;
   }
 
+  let prossimoTurno = '';
+  if (TURNI.indexOf(todayTurn) + 1 > 2)
+    prossimoTurno = TURNI[0];
+  else
+    prossimoTurno = TURNI[TURNI.indexOf(todayTurn) + 1]
+
   bot.sendPhoto(
     chatId,
-    "https://media.istockphoto.com/vectors/square-grunge-red-next-week-stamp-vector-id1008396864?k=6&m=1008396864&s=170667a&w=0&h=UZczzAIdxACKfe38iokO0ZWm4oOhnZz1TREC5P4ms_0=",
+    `./monkes/${random}.jpg`,
     {
-      caption: `<b>Il prossimo turno sarà di:</b>  <code>${TURNI[TURNI.indexOf(todayTurn) + 1]}</code>`,
+      caption: `<b>Il prossimo turno sarà di:</b>  <code>${prossimoTurno}</code>`,
       parse_mode: "HTML"
     }
   );
