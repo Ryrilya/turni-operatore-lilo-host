@@ -10,7 +10,8 @@ var todayTurn = undefined;
 var isSet = false;
 bot.onText(/\/routine/, function (msg, match) {
     var chatId = msg.chat.id;
-    bot.sendPhoto(chatId, "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/05/Daily-Routine-1.jpg?auto=format&q=60&w=1860&h=1395&fit=crop&crop=faces", {
+    var random = Math.floor(Math.random() * 12);
+    bot.sendPhoto(chatId, "./monkes/" + random + ".jpg", {
         caption: "<b>I turni dell'operatore Lilo sono:</b>\n\u2022 " + TURNI[0] + ": <code>[" + TIMES[0] + "]</code>\n\u2022 " + TURNI[1] + ": - <code>[" + TIMES[1] + "]</code>\n\u2022 " + TURNI[2] + ": - <code>[" + TIMES[2] + "]</code>",
         parse_mode: "HTML"
     });
@@ -52,21 +53,28 @@ bot.onText(/\/turno/, function (msg, match) {
     if (isFinished())
         // Metti il turno successivo
         nextTurn();
-    bot.sendPhoto(chatId, "http://www.azienda-digitale.it/wp-content/uploads/2016/11/tablet-gestione-turni-1980x1485.jpg", {
+    var random = Math.floor(Math.random() * 12);
+    bot.sendPhoto(chatId, "./monkes/" + random + ".jpg", {
         caption: "Il turno di oggi dell'operatore Lilo \u00E8:  <code>" + todayTurn + " (" + turnTime + ")</code>",
         parse_mode: "HTML"
     });
 });
 bot.onText(/\/prossimoTurno/, function (msg, match) {
     var chatId = msg.chat.id;
+    var random = Math.floor(Math.random() * 12);
     if (!isSet) {
         bot.sendMessage(chatId, "Il turno non è stato ancora impostato. Usare il comando <code>/setTurno [Mattina | Pomeriggio | Notte]</code>.", {
             parse_mode: "HTML"
         });
         return;
     }
-    bot.sendPhoto(chatId, "https://media.istockphoto.com/vectors/square-grunge-red-next-week-stamp-vector-id1008396864?k=6&m=1008396864&s=170667a&w=0&h=UZczzAIdxACKfe38iokO0ZWm4oOhnZz1TREC5P4ms_0=", {
-        caption: "<b>Il prossimo turno sar\u00E0 di:</b>  <code>" + TURNI[TURNI.indexOf(todayTurn) + 1] + "</code>",
+    var prossimoTurno = '';
+    if (TURNI.indexOf(todayTurn) + 1 > 2)
+        prossimoTurno = TURNI[0];
+    else
+        prossimoTurno = TURNI[TURNI.indexOf(todayTurn) + 1];
+    bot.sendPhoto(chatId, "./monkes/" + random + ".jpg", {
+        caption: "<b>Il prossimo turno sar\u00E0 di:</b>  <code>" + prossimoTurno + "</code>",
         parse_mode: "HTML"
     });
 });
